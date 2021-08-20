@@ -1,0 +1,13 @@
+[workspace]
+# This was commented out because openssl error
+#resolver = "2"
+
+members = [
+    "common",
+    "crm",
+    "tokidator",
+]
+
+[profile.release]
+debug = 1
+lto = false

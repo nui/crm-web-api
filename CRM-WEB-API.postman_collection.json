@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "747f6fc0-36e9-4922-bab5-8dab97245e18",
+		"name": "CRM-WEB-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "development",
+			"item": [
+				{
+					"name": "Encode password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"maker\"\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/dev/encode-password",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"dev",
+								"encode-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Parse token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\": \"{{token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_uri}}/dev/parse-token",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"dev",
+								"parse-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    var jsonData = pm.response.json();",
+									"    let data = jsonData.data;",
+									"    if(data) {",
+									"        pm.environment.set(\"token\", data.token);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_uri}}/auth/refresh-token",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    var jsonData = pm.response.json();",
+									"    let data = jsonData.data;",
+									"    if(data) {",
+									"        pm.environment.set(\"id\", data.id);",
+									"        pm.environment.set(\"token\", data.token);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_uri}}/auth/sign-in",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maker sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    var jsonData = pm.response.json();",
+									"    let data = jsonData.data;",
+									"    if(data) {",
+									"        pm.environment.set(\"id\", data.id);",
+									"        pm.environment.set(\"token\", data.token);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"maker\",\n\t\"password\": \"maker\"\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/auth/sign-in",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"current_password\": \"password\",\n\t\"new_password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/auth/change-password",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_uri}}/account/list",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"account",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"user1\",\n\t\"password\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_uri}}/account/create",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"account",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "management",
+			"item": [
+				{
+					"name": "enable jemalloc background thread",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{management_base_uri}}/jemalloc/background-thread/enable",
+							"host": [
+								"{{management_base_uri}}"
+							],
+							"path": [
+								"jemalloc",
+								"background-thread",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disable jemalloc background thread",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{management_base_uri}}/jemalloc/background-thread/disable",
+							"host": [
+								"{{management_base_uri}}"
+							],
+							"path": [
+								"jemalloc",
+								"background-thread",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "big allocation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{management_base_uri}}/big-alloc",
+							"host": [
+								"{{management_base_uri}}"
+							],
+							"path": [
+								"big-alloc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_uri}}",
+					"host": [
+						"{{base_uri}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_uri}}/stats",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    var jsonData = pm.response.json();",
+							"    let data = jsonData.data;",
+							"    if(data) {",
+							"        pm.environment.set(\"id\", data.id);",
+							"        pm.environment.set(\"token\", data.token);",
+							"    }",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_uri}}/request-headers",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"request-headers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

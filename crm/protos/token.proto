@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message AccessTokenMsg {
+    int64 accountId = 1;
+    int64 lastLogin = 2;
+    int64 notBefore = 3;
+    int64 notAfter = 4;
+    bytes policies = 5;
+}

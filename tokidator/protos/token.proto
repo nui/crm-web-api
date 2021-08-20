@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message TestAccessToken {
+    bool expired = 1;
+    bytes policies = 2;
+}

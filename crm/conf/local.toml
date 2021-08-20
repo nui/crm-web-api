@@ -1,0 +1,22 @@
+[database]
+pool_size = 4
+
+[tracing]
+filters = [
+    "debug",
+    "hyper=info",
+    "sqlx::query=warn",
+]
+#file = "log/crm.log"
+rotation = false
+
+[http_server]
+workers = 4
+#management_host = "127.0.0.1"
+management_port = 8001
+
+[jemalloc]
+background_thread = true
+
+[request_info]
+emit = false
